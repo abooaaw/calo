@@ -1,0 +1,315 @@
+(<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>House Construction Cost Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <script src="calculater.js"></script>
+    <div class="main-container">
+        <img src="Plotperty Logo (1).png" alt="">
+        <div class="heading-container">
+            <h1>Construction Cost Calculator</h1>
+            <p>Use our Construction Cost Calculator to get a quick estimate of required building materials along with their costs.</p>
+        </div>
+        <!-- form area -->
+        <form action="" id="form">
+            <div class="form-container">
+                <div id="area-size" class="fields">
+                    <label class="label" for="squareFeet">Area Size</label><br>
+                    <input type="text" class="input-field" id="squareFeet" placeholder="Enter Area Size" required>
+                    <select id="my-select" name="my-select">
+                        <option value="option1">Marla</option>
+                        <option value="option2">Kanal</option>
+                        <option value="option3">Sq.Ft</option>
+                        <option value="option4">Sq.Yards</option>
+                        <option value="option5">Sq.Meters</option>
+                        <option value="option6">Acre</option>
+                        <option value="option7">Murabba</option>
+                    </select>
+                </div>
+
+                <div id="construction-type" class="fields">
+                    <label class="label">Construction Type</label><br>
+                    <label>
+                        <input type="radio" name="my-radio" value="Grey Structure">
+                        Grey Structure
+                    </label>
+                    <br>
+                    <label>
+                        <input type="radio" name="my-radio" id="completeStructure" value="Complete">
+                        Complete
+                    </label>
+                </div>
+
+                <div class="button-container">
+                    <button type="button" onclick="estimateBuildingCost()">Calculate Cost</button>
+                </div>
+            </div>
+            <div class="heading-container">
+                <h3>Calculation of Cost | Approximate amount of cost for given construction is <span id="cost"></span> Rs.</h3>
+            </div>
+            <div class="form-container">
+                <table>
+                    <thead style="background-color: #ddd;">
+                        <tr>
+                            <th colspan="2">Approximate cost on various works of materials per thumb rule</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                          <tr>
+                            <td>Cement </td>
+                            <td id="cementCostmin">0.00 Rs.</td>
+                            <td id="cementCostmax">0.00 Rs.</td>
+                          </tr>
+                          <tr>
+                            <td>Sand </td>
+                            <td id="sandCostmin">0.00 Rs.</td>
+                            <td id="sandCostmax">0.00 Rs.</td>
+                          </tr>
+                          <tr>
+                            <td>Aggregate </td>
+                            <td id="aggregateCostmin">0.00 Rs.</td>
+                            <td id="aggregateCostmax">0.00 Rs.</td>
+                          </tr>
+                          <tr>
+                            <td>Steel</td>
+                            <td id="steelCostmin">0.00 Rs.</td>
+                            <td id="steelCostmax">0.00 Rs.</td>
+                          </tr>
+                          <tr>
+                            <td>Fittings <br>(Window  + Doors + Plumbing  + Electrical  + Sanitary) </td>
+                            <td id="fittingsCostmin">0.00 Rs.</td>
+                            <td id="fittingsCostmax">0.00 Rs.</td>
+                          </tr>
+                          <tr>
+                            <td>Finishers<br>(Paint  + Tiles + Bricks )</td>
+                            <td id="finishersCostmin">0.00 Rs.</td>
+                            <td id="finishersCostmax">0.00 Rs.</td>
+                          </tr>
+                          <tr>
+                            <td>Total Cost</td>
+                            <td id="totalCostMin"></td>
+                            <td id="totalCostMax"></td>
+                          </tr>
+                          
+                    </tbody>
+                </table>
+                
+            </div>
+        </form>
+    </div>
+    <script>
+        function estimateBuildingCost() {
+  const squareFeet = parseFloat(document.getElementById('squareFeet').value);
+  const isCompleteStructure = document.getElementById('completeStructure').checked;
+
+  function calculateCosts(squareFeet, isCompleteStructure) {
+   
+    const constructionCostRange = {
+      min: 1950,
+      max: 3800
+    };
+
+    const constructionMaterialCostMin = squareFeet * constructionCostRange.min;
+    const constructionMaterialCostMax = squareFeet * constructionCostRange.max;
+
+    const steelRange = {
+      min: squareFeet * 1000,
+      max: squareFeet * 1500
+    };
+    const steelCostMin = steelRange.min;
+    const steelCostMax = steelRange.max;
+
+    const brickRange = {
+      min: 4,
+      max: 7
+    };
+    const brickCount = brickRange.max;
+    const brickCostPerBrickRange = {
+      min: 13,
+      max: 20
+    };
+    const brickCostPerBrickMin = brickCostPerBrickRange.min;
+    const brickCostPerBrickMax = brickCostPerBrickRange.max;
+    const bricksCostMin = brickCount * brickCostPerBrickMin;
+    const bricksCostMax = brickCount * brickCostPerBrickMax;
+
+    const concreteRange = {
+      min: squareFeet * 80,
+      max: squareFeet * 90
+    };
+    const concreteVolumeMin = concreteRange.min;
+    const concreteVolumeMax = concreteRange.max;
+    const concreteCostPerCubicMeterRange = {
+      min: 250,
+      max: 380
+    };
+    const concreteCostPerCubicMeterMin = concreteCostPerCubicMeterRange.min;
+    const concreteCostPerCubicMeterMax = concreteCostPerCubicMeterRange.max;
+    const concreteCostMin = concreteVolumeMin * concreteCostPerCubicMeterMin;
+    const concreteCostMax = concreteVolumeMax * concreteCostPerCubicMeterMax;
+
+    const sandRange = {
+      min: squareFeet * 20,
+      max: squareFeet * 30
+    };
+    const sandVolumeMin = sandRange.min;
+    const sandVolumeMax = sandRange.max;
+    const sandCostPerCubicMeterRange = {
+      min: 1000,
+      max: 1500
+    };
+    const sandCostPerCubicMeterMin = sandCostPerCubicMeterRange.min;
+    const sandCostPerCubicMeterMax = sandCostPerCubicMeterRange.max;
+    const sandCostMin = sandVolumeMin * sandCostPerCubicMeterMin*0.1;
+    const sandCostMax = sandVolumeMax * sandCostPerCubicMeterMax*0.1;
+
+    const crushRange = {
+      min: squareFeet * 30,
+      max: squareFeet * 40
+    };
+    const crushVolumeMin = crushRange.min;
+    const crushVolumeMax = crushRange.max;
+    const crushCostPerCubicMeterRange = {
+      min: 50,
+      max: 60
+    };
+    const crushCostPerCubicMeterMin = crushCostPerCubicMeterRange.min;
+    const crushCostPerCubicMeterMax = crushCostPerCubicMeterRange.max;
+    const crushCostMin = crushVolumeMin * crushCostPerCubicMeterMin;
+    const crushCostMax = crushVolumeMax * crushCostPerCubicMeterMax;
+
+    const cementBags = squareFeet * 1.2;
+    const cementCostPerBag = 1000;
+    const cementCostMin = cementBags * cementCostPerBag;
+    const cementCostMax = cementCostMin * 1.5;
+
+    const laborCostPerSquareFeetRange = {
+      min: 300,
+      max: 500
+    };
+    const laborCostPerSquareFeetMin = laborCostPerSquareFeetRange.min;
+    const laborCostPerSquareFeetMax = laborCostPerSquareFeetRange.max;
+    const laborCostMin = squareFeet * laborCostPerSquareFeetMin;
+    const laborCostMax = squareFeet * laborCostPerSquareFeetMax;
+    const plumbingAndElectricalCostRange = {
+      min: 2500,
+      max: 4000
+      };
+      const plumbingAndElectricalCostMin = plumbingAndElectricalCostRange.min;
+      const plumbingAndElectricalCostMax = plumbingAndElectricalCostRange.max;
+      
+      const miscellaneousCostRange = {
+      min: 1800,
+      max: 3000
+      };
+      const miscellaneousCostMin = miscellaneousCostRange.min;
+      const miscellaneousCostMax = miscellaneousCostRange.max;
+      
+      let totalCostMin =
+      constructionMaterialCostMin +
+      steelCostMin +
+      bricksCostMin +
+      concreteCostMin +
+      sandCostMin +
+      crushCostMin +
+      cementCostMin +
+      laborCostMin +
+      plumbingAndElectricalCostMin +
+      miscellaneousCostMin;
+      
+      let totalCostMax =
+      constructionMaterialCostMax +
+      steelCostMax +
+      bricksCostMax +
+      concreteCostMax +
+      sandCostMax +
+      crushCostMax +
+      cementCostMax +
+      laborCostMax +
+      plumbingAndElectricalCostMax +
+      miscellaneousCostMax;
+      
+      let fittingsCostMin = 0;
+      let fittingsCostMax = 0;
+      let finishersCostMin = 0;
+      let finishersCostMax = 0;
+    
+      if (isCompleteStructure) {
+        const aluminumWindowsRange = {
+          min: squareFeet * 700,
+          max: squareFeet * 860
+        };
+        const aluminumWindowsCostMin = aluminumWindowsRange.min;
+        const aluminumWindowsCostMax = aluminumWindowsRange.max;
+    
+        const tilesRange = {
+          min: squareFeet * 800,
+          max: squareFeet * 2000
+        };
+        const tilesCostMin = tilesRange.min;
+        const tilesCostMax = tilesRange.max;
+    
+        const doorsRange = {
+          min: squareFeet * 350,
+          max: squareFeet * 750
+        };
+        const doorsCostMin = doorsRange.min;
+        const doorsCostMax = doorsRange.max;
+    
+        const marbleRange = {
+          min: squareFeet * 40,
+          max: squareFeet * 120
+        };
+        const marbleCostMin = marbleRange.min;
+        const marbleCostMax = marbleRange.max;
+    
+        const mainIronGateRange = {
+          min: 40000,
+          max: 120000
+        };
+        const mainIronGateCostMin = mainIronGateRange.min;
+        const mainIronGateCostMax = mainIronGateRange.max;
+    
+        fittingsCostMin = aluminumWindowsCostMin + doorsCostMin + plumbingAndElectricalCostMin + mainIronGateCostMin;
+        fittingsCostMax = aluminumWindowsCostMax + doorsCostMax + plumbingAndElectricalCostMax + mainIronGateCostMax;
+    
+        finishersCostMin = marbleCostMin + tilesCostMin + bricksCostMin + laborCostMin;
+        finishersCostMax = marbleCostMax + tilesCostMax + bricksCostMax + laborCostMax;
+      }
+    // Access the table cells for each item and update their contents with the calculated costs
+    document.getElementById('cementCostmin').textContent = 'PKR ' + cementCostMin.toLocaleString();
+    document.getElementById('cementCostmax').textContent = 'PKR ' + cementCostMax.toLocaleString();
+    document.getElementById('sandCostmin').textContent = 'PKR ' + sandCostMin.toLocaleString();
+    document.getElementById('sandCostmax').textContent = 'PKR ' + sandCostMax.toLocaleString();
+    document.getElementById('aggregateCostmin').textContent = 'PKR ' + crushCostMin.toLocaleString();
+    document.getElementById('aggregateCostmax').textContent = 'PKR ' + crushCostMax.toLocaleString();
+    document.getElementById('steelCostmin').textContent = 'PKR ' + steelCostMin.toLocaleString();
+    document.getElementById('steelCostmax').textContent = 'PKR ' + steelCostMax.toLocaleString();
+    document.getElementById('fittingsCostmin').textContent = 'PKR ' + fittingsCostMin.toLocaleString();
+    document.getElementById('fittingsCostmax').textContent = 'PKR ' + fittingsCostMax.toLocaleString();
+    document.getElementById('finishersCostmin').textContent = 'PKR ' + finishersCostMin.toLocaleString();
+    document.getElementById('finishersCostmax').textContent = 'PKR ' + finishersCostMax.toLocaleString();
+   document.getElementById('totalCostmin').textContent = 'PKR ' + costEstimation.costMin.toLocaleString();
+   document.getElementById('totalCostmax').textContent = 'PKR ' + costEstimation.costMax.toLocaleString();
+   return {
+    costMin: totalCostMin,
+    costMax: totalCostMax
+  };
+      }
+      const costEstimation = calculateCosts(squareFeet, isCompleteStructure);
+
+      // Update the table cells for the total cost
+      document.getElementById('totalCostmin').textContent = 'PKR ' + costEstimation.costMin.toLocaleString();
+      document.getElementById('totalCostmax').textContent = 'PKR ' + costEstimation.costMax.toLocaleString();
+    
+      document.getElementById('cost').textContent = 'Estimated cost range: PKR ' + costEstimation.costMin.toLocaleString() + ' - PKR ' + costEstimation.costMax.toLocaleString();
+    }
+
+    </script>
+</body>
+</html>

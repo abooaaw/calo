@@ -1,0 +1,122 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    margin-top: 5rem;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+    background-color: #D9AFD9;
+    background-image: linear-gradient(0deg, #D9AFD9 0%, #97D9E1 100%);
+    height:100vh;
+    width: 100vw;
+    font-family: "poppins";
+    overflow-y: hidden;
+
+}
+.main-container{
+    margin: 0px 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    border-radius: 1rem;
+    overflow: hidden;
+    height:90vh;
+    margin-top: -10rem;
+    overflow: auto;
+    overflow-x: hidden;
+    box-shadow: 7px 10px 15px -3px rgba(0,0,0,0.1);
+   
+}
+.heading-container{
+    width: 80%;
+    margin:  1rem;
+}
+.heading-container h1{
+  text-align: center;
+   
+}
+.heading-container p{
+
+    text-align: center;
+}
+#form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.form-container{
+
+    flex-wrap: wrap;
+    margin-left: 20px;
+    padding: 10px 10px;
+
+}
+.fields{
+ margin-right: 30px;
+ margin-bottom: 20px;
+
+}
+.input-field{
+    border: none;
+    border-bottom: 1px solid gray;
+    padding: 5px 5px;
+    width: 150px;
+    font-size: 1rem;
+    background: transparent;
+    outline: none;
+}
+#my-select{
+    border: none;
+    border-bottom: 1px solid gray;
+    padding: 5px 5px;
+    font-size: 1rem;
+    background: transparent;
+    outline: none;
+    margin-left: -10px;
+}
+#form{
+   display: flex;
+   align-items: center;
+
+}
+.button-container{
+    margin: 20px;
+}
+.button-container button{
+width: 250px;
+height: 60px;
+background-color: #4158D0;
+background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+color: white;
+font-size: 1.5rem;
+border: none;
+cursor: pointer;
+border-radius: 2rem;
+}
+/* table css */
+.label{
+    font-weight: bold;
+    
+
+}
+table {
+    margin-top: -30px;
+    font-size: 13px;
+    border: 1px solid #ddd;
+    width: 100%;
+}
+thead{
+    background-color: #ddd;
+}
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="calculater.js"></script>
+    <title>House Construction Cost Calculator</title></head>
+<body>
+    <div class="main-container">
+        <img src="Plotperty Logo (1).png" alt="">
+        <div class="heading-container">
+            <h3>Calculation of Cost | Approximate amount of cost for given construction is <span id="cost"></span> Rs.</h3>
+        </div>
+        <div class="form-container">
+            <table>
+                <thead style="background-color: #ddd;">
+                    <td colspan="2">Approximate cost on various works of materials per thumb rule</td>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Cement (16.4 %)</td>
+                        <td id="cementCost">0.00 Rs.</td>
+                    </tr>
+                    <tr>
+                        <td>Sand (12.3 %)</td>
+                        <td id="sandCost">0.00 Rs.</td>
+                    </tr>
+                    <tr>
+                        <td>Aggregate (7.4 %)</td>
+                        <td id="aggregateCost">0.00 Rs.</td>
+                    </tr>
+                    <tr>
+                        <td>Steel (24.6 %)</td>
+                        <td id="steelCost">0.00 Rs.</td>
+                    </tr>
+                    <tr>
+                        <td>Fittings (22.8 %)<br>(Window (3.0 %) + Doors (3.4 %) + Plumbing (5.5 %) + Electrical (6.8 %) + Sanitary (4.1 %))</td>
+                        <td id="fittingsCost">0.00 Rs.</td>
+</tr>
+<tr>
+    <td>Finishers (16.5 %)<br>(Paint (4.1 %) + Tiles (8.0 %) + Bricks (4.4 %))</td>
+    <td id="finishersCost">0.00 Rs.</td>
+</tr>
+<tr>
+    <td>Total Cost</td>
+    <td id="totalCost"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<script>
+    // Retrieve the cost and other values from the URL query parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const cost = urlParams.get('cost');
+    const cementCost = urlParams.get('cementCost');
+    const sandCost = urlParams.get('sandCost');
+    const aggregateCost = urlParams.get('aggregateCost');
+    const steelCost = urlParams.get('steelCost');
+    const fittingsCost = urlParams.get('fittingsCost');
+    const finishersCost = urlParams.get('finishersCost');
+    const totalCost = urlParams.get('totalCost');
+
+    // Update the respective elements with the retrieved values
+    document.getElementById('cost').textContent = cost;
+    document.getElementById('cementCost').textContent = cementCost + ' Rs.';
+    document.getElementById('sandCost').textContent = sandCost + ' Rs.';
+    document.getElementById('aggregateCost').textContent = aggregateCost + ' Rs.';
+    document.getElementById('steelCost').textContent = steelCost + ' Rs.';
+    document.getElementById('fittingsCost').textContent = fittingsCost + ' Rs.';
+    document.getElementById('finishersCost').textContent = finishersCost + ' Rs.';
+    document.getElementById('totalCost').textContent = totalCost + ' Rs.';
+</script>
+</body>
+</html>
